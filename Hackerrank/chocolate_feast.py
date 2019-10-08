@@ -7,5 +7,3 @@ def chocolateFeast(n, c, m):
         wraps = wraps // m + wraps % m
 
     return chocs
-
-print (chocolateFeast(6, 2 ,2))
