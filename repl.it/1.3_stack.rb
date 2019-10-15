@@ -10,7 +10,6 @@ class Node
 end
 
 class Stack
-
   def initialize
     @index = -1
   end
@@ -27,16 +26,12 @@ class Stack
     @index += 1
   end
 
-
-
   def pop
     poped = @tail
     @tail = get_node(@index - 1)
     @tail.next_node = nil
     @index -= 1
-    if @index == -1
-      @head = nil
-    end
+    @head = nil if @index == -1
     poped.value
   end
 
@@ -44,14 +39,13 @@ class Stack
 
   def get_node(index)
     node = @head
-    
+
     while index.positive? && node
       node = node.next_node
       index -= 1
     end
     node
   end
-
 end
 
 stack = Stack.new

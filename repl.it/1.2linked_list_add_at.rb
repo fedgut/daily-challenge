@@ -36,42 +36,41 @@ class LinkedList
 
     node.value
   end
-  
+
   def add_at(index, number)
-      if index == 0  
-        old_at_index = get_node(index) 
-        @head = Node.new(number)
-        @head.next_node = old_at_index
-      else
-        node = get_node(index-1)
-        old_next = node.next_node
-        new_next = Node.new(number)
-        node.next_node = new_next 
-        new_next.next_node = old_next
-      end
+    if index == 0
+      old_at_index = get_node(index)
+      @head = Node.new(number)
+      @head.next_node = old_at_index
+    else
+      node = get_node(index - 1)
+      old_next = node.next_node
+      new_next = Node.new(number)
+      node.next_node = new_next
+      new_next.next_node = old_next
+    end
   end
-  
+
   def remove(index)
     if index == 0
       @head = @head.next_node
-    else 
-      prev = get_node(index-1)
+    else
+      prev = get_node(index - 1)
       prev.next_node = prev.next_node.next_node
     end
   end
-    
-  
+
   private
+
   def get_node(index)
     node = @head
-    
-    while (index) > 0 && node
+
+    while index > 0 && node
       node = node.next_node
       index -= 1
     end
     node
   end
-  
 end
 
 list = LinkedList.new
