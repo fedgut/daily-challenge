@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-
 class Node
   attr_accessor :value, :next_node
 
@@ -11,7 +10,6 @@ class Node
 end
 
 class Queue
-
   def add(number)
     new_node = Node.new(number)
 
@@ -26,9 +24,9 @@ class Queue
   def remove
     return -1 if @head.nil?
 
-      poped = @head
-      @head = @head.next_node
-      poped.value
+    poped = @head
+    @head = @head.next_node
+    poped.value
   end
 end
 
