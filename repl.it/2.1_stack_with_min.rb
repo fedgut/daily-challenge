@@ -20,10 +20,12 @@ class Stack
     new_node.next_node = @head unless @head.nil?
 
     @head = new_node
-    @min.push(@head.value) if @min.empty?
-
-    @min.append(new_node.value) if new_node.value <= @min[-1]
-
+    if @min.empty?
+      @min.push(@head.value) 
+    elsif new_node.value <= @min[-1]
+      @min.append(new_node.value)
+    end
+    
     @index += 1
   end
 
