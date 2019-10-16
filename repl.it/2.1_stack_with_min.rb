@@ -17,65 +17,46 @@ class Stack
 
   def push(number)
     new_node = Node.new(number)
+    new_node.next_node = @head unless @head.nil?
 
-    if @head.nil?
-      @head = new_node
-      @min = @head.value
-    else
-      @tail.next_node = new_node
-    end
-    @tail = new_node
+    @head = new_node
+    @min.push(@head.value) if @min.empty?
+
+    @min.append(new_node.value) if new_node.value <= @min[-1]
+
     @index += 1
-    @min.append(new_node.value) if new_node.value < @min[-1]
   end
 
   def pop
-    poped = @tail
-    @tail = get_node(@index - 1)
-    @tail.next_node = nil
-    @index -= 1
-    @head = nil if @index == -1
+    poped = @head
+
+    if @head.next_node
+      @head = @head.next_node
+    else
+      @head = nil
+    end
+    @min.delete_at(-1) if poped.value == @min[-1]
     poped.value
   end
 
   def min
-    min = @head.value
-    current = @head
-    while current.next_node
-      min = current.next_node.value if current.value > current.next_node.value
-      current = current.next_node
-    end
-    min
-  end
-
-  private
-
-  def get_node(index)
-    node = @head
-
-    while index.positive? && node
-      node = node.next_node
-      index -= 1
-    end
-    node
+    @min[-1]
   end
 end
 
 stack = Stack.new
 stack.push(3)
 stack.push(5)
-puts stack.min
-# => 3
-
-stack.pop
-stack.push(7)
-puts stack.min
-# => 3
+puts stack.pop
+# => 5
 
 stack.push(2)
-puts stack.min
+stack.push(7)
+puts stack.pop
+# => 7
+
+puts stack.pop
 # => 2
 
-stack.pop
-puts stack.min
+puts stack.pop
 # => 3
