@@ -12,6 +12,7 @@ end
 class Stack
   def initialize
     @index = -1
+    @min = []
   end
 
   def push(number)
@@ -19,11 +20,13 @@ class Stack
 
     if @head.nil?
       @head = new_node
+      @min = @head.value
     else
       @tail.next_node = new_node
     end
     @tail = new_node
     @index += 1
+    @min.append(new_node.value) if new_node.value < @min[-1]
   end
 
   def pop
@@ -38,10 +41,8 @@ class Stack
   def min
     min = @head.value
     current = @head
-    while current.next_node do
-      if current.value > current.next_node.value
-        min = current.next_node.value
-      end
+    while current.next_node
+      min = current.next_node.value if current.value > current.next_node.value
       current = current.next_node
     end
     min
